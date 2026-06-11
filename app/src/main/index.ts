@@ -26,7 +26,7 @@ let mainWindow: BrowserWindow | null = null
 async function createWindow() {
   // Use app.getAppPath() — reliably returns the project root (where package.json lives)
   // in both dev mode and production, regardless of ESM/CJS compilation output path.
-  const preloadPath = path.join(app.getAppPath(), 'dist-electron', 'main', 'preload.js')
+  const preloadPath = path.join(app.getAppPath(), 'dist-electron', 'main', 'preload.cjs')
   logger.info(`Loading preload script from: ${preloadPath}`)
 
   mainWindow = new BrowserWindow({
