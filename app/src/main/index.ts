@@ -1,5 +1,6 @@
 import { app, BrowserWindow, ipcMain, clipboard } from 'electron'
 import path from 'path'
+import { fileURLToPath } from 'node:url'
 import { logger } from './utils/logger'
 import { dbService } from './services/database'
 import { ollamaService } from './services/ollama'
@@ -7,10 +8,23 @@ import { shortcutService } from './services/shortcut'
 import { trayService } from './services/tray'
 import { simulatePaste } from './utils/clipboard'
 
+// ESM compatibility — __dirname and __filename are not available in ESM modules.
+// Use import.meta.url to derive them when running as ESM; in CJS the globals exist natively.
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore — import.meta.url may not be recognized depending on tsconfig module
+const __esm_dirname = (() => {
+  try {
+    // CJS: __dirname is a global
+    if (typeof __dirname === 'string') return __dirname
+  } catch { /* ESM — fall through */ }
+  // ESM: derive from import.meta.url
+  return path.dirname(fileURLToPath(import.meta.url))
+})()
+
 let mainWindow: BrowserWindow | null = null
 
 async function createWindow() {
-  const preloadPath = path.join(__dirname, 'preload.js')
+  const preloadPath = path.join(__esm_dirname, 'preload.js')
   logger.info(`Loading preload script from: ${preloadPath}`)
 
   mainWindow = new BrowserWindow({
@@ -39,7 +53,7 @@ async function createWindow() {
     await mainWindow.loadURL(process.env.VITE_DEV_SERVER_URL)
     mainWindow.webContents.openDevTools({ mode: 'detach' })
   } else {
-    await mainWindow.loadFile(path.join(__dirname, '../../dist/index.html'))
+    await mainWindow.loadFile(path.join(__esm_dirname, '../../dist/index.html'))
   }
 
   // Focus blur behavior (hide window when clicking outside)

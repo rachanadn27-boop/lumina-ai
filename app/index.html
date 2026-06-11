@@ -3,18 +3,37 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- Content Security Policy: Strict local-only resources allowing Vite development ports -->
+    <!--
+      Content Security Policy:
+      - In production (file://): only 'self' + localhost:11434 for Ollama
+      - In dev (http://localhost:517x): allow Vite HMR websockets
+      - Fonts: allow fonts.googleapis.com and fonts.gstatic.com for Google Fonts
+      - unsafe-inline required for Tailwind injected styles
+    -->
     <meta
       http-equiv="Content-Security-Policy"
-      content="default-src 'self' http://localhost:* http://127.0.0.1:*; script-src 'self' 'unsafe-inline' 'unsafe-eval' http://localhost:* http://127.0.0.1:*; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com http://localhost:*; font-src 'self' https://fonts.gstatic.com http://localhost:*; connect-src 'self' ws://localhost:* ws://127.0.0.1:* http://127.0.0.1:11434 http://localhost:11434 http://localhost:* http://127.0.0.1:*;"
+      content="default-src 'self' http://localhost:* http://127.0.0.1:*; script-src 'self' 'unsafe-inline' 'unsafe-eval' http://localhost:* http://127.0.0.1:*; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com http://localhost:*; font-src 'self' data: https://fonts.gstatic.com http://localhost:*; connect-src 'self' ws://localhost:* ws://127.0.0.1:* http://127.0.0.1:11434 http://localhost:11434 http://localhost:* http://127.0.0.1:*; img-src 'self' data:;"
     />
     <title>Lumina AI</title>
-    <!-- Modern Google Fonts -->
+    <!-- Google Fonts — Inter + Outfit -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* Fallback font stack if Google Fonts fails (offline / CSP block) */
+      :root {
+        --font-inter: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+        --font-outfit: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      }
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      html, body, #root { width: 100%; height: 100%; overflow: hidden; }
+      body { background: #0B0B0C; color: #F3F4F6; font-family: var(--font-inter); -webkit-font-smoothing: antialiased; }
+    </style>
   </head>
-  <body class="bg-transparent select-none overflow-hidden font-sans">
+  <body class="select-none overflow-hidden">
     <div id="root"></div>
     <script type="module" src="/src/renderer/main.tsx"></script>
   </body>
