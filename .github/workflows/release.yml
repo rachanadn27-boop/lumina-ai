@@ -1,0 +1,70 @@
+name: Lumina Release Build
+
+# Triggers only when a version tag is pushed (e.g. git tag v1.0.0 && git push --tags)
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  # ----------------------------------------------------------------
+  # Build matrix: Windows (.exe), macOS (.dmg), Linux (.AppImage)
+  # ----------------------------------------------------------------
+  release:
+    name: Build & Release (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: windows-latest
+            platform: win
+          - os: macos-latest
+            platform: mac
+          - os: ubuntu-latest
+            platform: linux
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+          cache-dependency-path: app/package-lock.json
+
+      - name: Install Dependencies
+        working-directory: app
+        run: npm ci
+
+      # Linux-only: install native packaging tools needed by electron-builder
+      - name: Install Linux packaging tools
+        if: matrix.os == 'ubuntu-latest'
+        run: sudo apt-get install -y rpm fakeroot dpkg libarchive-tools
+
+      # Rebuild native modules (sqlite3) for the correct Electron ABI
+      - name: Rebuild Native Modules
+        working-directory: app
+        run: npx @electron/rebuild -f -w sqlite3
+        continue-on-error: true
+
+      # Compile TypeScript + Vite bundle
+      - name: Compile & Bundle (tsc + vite)
+        working-directory: app
+        run: npm run build:electron
+        env:
+          CI: true
+
+      # Package with electron-builder and publish to GitHub Release
+      - name: Package & Publish (${{ matrix.platform }})
+        working-directory: app
+        run: npx electron-builder --${{ matrix.platform }} --publish always
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # Skip code signing in CI (users can still run with a warning)
+          CSC_IDENTITY_AUTO_DISCOVERY: false
+          # macOS: skip notarization
+          SKIP_NOTARIZE: true

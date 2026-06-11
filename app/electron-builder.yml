@@ -1,32 +1,67 @@
-# electron-builder.yml
+# electron-builder.yml — Lumina desktop app packaging config
 appId: com.lumina.assistant
 productName: Lumina
+copyright: Copyright © 2025 Lumina AI
+
 directories:
   output: release
   buildResources: build
+
 files:
   - dist-electron/**/*
   - dist/**/*
   - package.json
+
 asar: true
+
+# Publish to GitHub Releases automatically
+publish:
+  provider: github
+  owner: rachanadn27-boop
+  repo: lumina-ai
+  releaseType: release
+
+# ── Windows ───────────────────────────────────────────────
 win:
   target:
-    - nsis
-    - portable
+    - target: nsis
+      arch: [x64]
+    - target: portable
+      arch: [x64]
   icon: build/icon.ico
+  artifactName: Lumina-Setup-${version}.${ext}
+
 nsis:
   oneClick: false
   allowToChangeInstallationDirectory: true
   createDesktopShortcut: true
   createStartMenuShortcut: true
   shortcutName: Lumina
+  installerIcon: build/icon.ico
+  uninstallerIcon: build/icon.ico
+
+# ── macOS ────────────────────────────────────────────────
 mac:
   target:
-    - dmg
+    - target: dmg
+      arch: [arm64, x64]
   category: public.app-category.productivity
   icon: build/icon.icns
+  artifactName: Lumina-${version}-${arch}.${ext}
+  darkModeSupport: true
+  minimumSystemVersion: '12.0'
+
+dmg:
+  title: Lumina ${version}
+
+# ── Linux ────────────────────────────────────────────────
 linux:
   target:
-    - AppImage
-    - deb
+    - target: AppImage
+      arch: [x64]
+    - target: deb
+      arch: [x64]
   category: Utility
+  icon: build/icon.png
+  artifactName: Lumina-${version}.${ext}
+  description: Privacy-first local AI writing assistant powered by Ollama

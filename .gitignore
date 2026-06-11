@@ -6,9 +6,12 @@ node_modules/
 # Build outputs
 dist/
 dist-electron/
-build/
 .next/
 out/
+release/
+
+# Keep app/build/ icons (used by electron-builder)
+!app/build/
 
 # Database and logs
 *.db
