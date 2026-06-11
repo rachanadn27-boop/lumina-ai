@@ -1,6 +1,6 @@
 {
   "name": "lumina",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Privacy-first local AI writing & coding assistant powered by Ollama — 100% offline, no telemetry.",
   "author": {
     "name": "Lumina AI",

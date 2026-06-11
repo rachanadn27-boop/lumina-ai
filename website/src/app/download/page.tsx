@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { Download, CheckCircle, ShieldCheck, Terminal, Cpu, ExternalLink, ChevronRight, Star } from 'lucide-react'
 
 const REPO = 'rachanadn27-boop/lumina-ai'
-const VERSION = '1.0.0'
+const VERSION = '1.0.1'
 const BASE_URL = `https://github.com/${REPO}/releases/latest/download`
 
 const platforms = [

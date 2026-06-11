@@ -151,9 +151,9 @@ export default function DocsPage() {
 
             <div className="space-y-3">
               {[
-                { os: '🪟 Windows', steps: ['Run Lumina-Setup-1.0.0.exe', 'Click "More info" → "Run anyway" if SmartScreen warns you', 'Follow the NSIS installer wizard', 'Lumina starts automatically after install'] },
+                { os: '🪟 Windows', steps: ['Run Lumina-Setup-1.0.1.exe', 'Click "More info" → "Run anyway" if SmartScreen warns you', 'Follow the NSIS installer wizard', 'Lumina starts automatically after install'] },
                 { os: '🍎 macOS', steps: ['Open the .dmg file', 'Right-click Lumina.app → Open (first time only, to bypass Gatekeeper)', 'Drag to Applications folder', 'Launch from Applications or Spotlight'] },
-                { os: '🐧 Linux', steps: ['chmod +x Lumina-1.0.0.AppImage', 'Run ./Lumina-1.0.0.AppImage', 'Or install the .deb with: sudo dpkg -i Lumina-1.0.0.deb'] },
+                { os: '🐧 Linux', steps: ['chmod +x Lumina-1.0.1.AppImage', 'Run ./Lumina-1.0.1.AppImage', 'Or install the .deb with: sudo dpkg -i Lumina-1.0.1.deb'] },
               ].map(({ os, steps }) => (
                 <div key={os} className="p-4 rounded-xl bg-bg-darkSecondary border border-white/5 space-y-2">
                   <p className="font-bold text-white text-xs">{os}</p>

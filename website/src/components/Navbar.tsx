@@ -23,7 +23,7 @@ export function Navbar() {
             <Sparkles className="w-4 h-4 text-white" />
           </div>
           <span className="text-lg font-bold text-white tracking-wide font-outfit">Lumina</span>
-          <span className="hidden sm:inline text-[10px] px-1.5 py-0.5 rounded-full bg-brand-primary/10 border border-brand-primary/20 text-indigo-300 font-mono">v1.0.0</span>
+          <span className="hidden sm:inline text-[10px] px-1.5 py-0.5 rounded-full bg-brand-primary/10 border border-brand-primary/20 text-indigo-300 font-mono">v1.0.1</span>
         </Link>
 
         {/* Desktop Nav */}
