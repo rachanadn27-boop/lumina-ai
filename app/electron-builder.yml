@@ -1,0 +1,32 @@
+# electron-builder.yml
+appId: com.lumina.assistant
+productName: Lumina
+directories:
+  output: release
+  buildResources: build
+files:
+  - dist-electron/**/*
+  - dist/**/*
+  - package.json
+asar: true
+win:
+  target:
+    - nsis
+    - portable
+  icon: build/icon.ico
+nsis:
+  oneClick: false
+  allowToChangeInstallationDirectory: true
+  createDesktopShortcut: true
+  createStartMenuShortcut: true
+  shortcutName: Lumina
+mac:
+  target:
+    - dmg
+  category: public.app-category.productivity
+  icon: build/icon.icns
+linux:
+  target:
+    - AppImage
+    - deb
+  category: Utility
