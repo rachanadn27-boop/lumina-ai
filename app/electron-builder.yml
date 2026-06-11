@@ -30,7 +30,6 @@ win:
     - target: portable
       arch: [x64]
   icon: build/icon.ico
-  artifactName: Lumina-Setup-${version}.${ext}
 
 nsis:
   oneClick: false
@@ -40,6 +39,7 @@ nsis:
   shortcutName: Lumina
   installerIcon: build/icon.ico
   uninstallerIcon: build/icon.ico
+  artifactName: Lumina-Setup-${version}.${ext}
 
 # ── macOS ────────────────────────────────────────────────
 mac:
