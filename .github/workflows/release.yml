@@ -13,6 +13,8 @@ jobs:
   release:
     name: Build & Release (${{ matrix.os }})
     runs-on: ${{ matrix.os }}
+    permissions:
+      contents: write
 
     strategy:
       fail-fast: false
