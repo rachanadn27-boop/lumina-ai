@@ -5,7 +5,7 @@ import { Mail, Github, Bug, Sparkles, Send, ExternalLink, CheckCircle } from 'lu
 
 export default function ContactPage() {
   const [sent, setSent] = useState(false)
-  const [form, setForm] = useState({ name: '', email: '', type: 'General Inquiry', message: '' })
+  const [form, setForm] = useState({ name: 'Rachana D N', email: 'rachanadn27@gmail.com', type: 'General Inquiry', message: '' })
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
