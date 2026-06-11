@@ -77,14 +77,13 @@ jobs:
         working-directory: app
         run: npm ci
 
-      # electron-builder requires these Linux tools for packaging
-      - name: Install Linux packaging tools
-        run: sudo apt-get install -y rpm fakeroot dpkg
-
-      - name: Compile & Package App
+      # Only compile TypeScript + bundle with Vite.
+      # electron-builder (native packaging) is intentionally skipped in CI
+      # because it requires icon assets and platform-specific signing tools
+      # that are not available / needed for build validation.
+      - name: Compile & Bundle App (tsc + vite)
         working-directory: app
-        run: npm run build
+        run: npm run build:electron
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          # Skip code signing in CI
-          CSC_IDENTITY_AUTO_DISCOVERY: false
+          # Prevent vite-plugin-electron from spawning an Electron process
+          CI: true
