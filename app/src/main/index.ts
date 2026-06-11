@@ -24,7 +24,9 @@ const __esm_dirname = (() => {
 let mainWindow: BrowserWindow | null = null
 
 async function createWindow() {
-  const preloadPath = path.join(__esm_dirname, 'preload.js')
+  // Use app.getAppPath() — reliably returns the project root (where package.json lives)
+  // in both dev mode and production, regardless of ESM/CJS compilation output path.
+  const preloadPath = path.join(app.getAppPath(), 'dist-electron', 'main', 'preload.js')
   logger.info(`Loading preload script from: ${preloadPath}`)
 
   mainWindow = new BrowserWindow({
@@ -38,9 +40,9 @@ async function createWindow() {
     show: false, // Don't show initially
     webPreferences: {
       preload: preloadPath,
-      contextIsolation: true,
-      nodeIntegration: false,
-      sandbox: true,
+      contextIsolation: true,   // required for contextBridge to work
+      nodeIntegration: false,   // keep renderer isolated from Node
+      sandbox: false,           // must be false — sandbox:true prevents preload from loading native modules
       webSecurity: true
     }
   })

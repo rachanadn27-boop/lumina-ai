@@ -46,7 +46,14 @@ export default defineConfig({
           build: {
             outDir: 'dist-electron/main',
             minify: false,
-            rollupOptions: electronRollupOptions,
+            lib: {
+              entry: 'src/main/preload.ts',
+              formats: ['cjs'],
+              fileName: () => 'preload.js',
+            },
+            rollupOptions: {
+              external: ['electron'],
+            },
           },
         },
       },

@@ -17,6 +17,13 @@ export function useOllamaStream() {
 
   // Clean up IPC listeners
   useEffect(() => {
+    // Guard: luminaAPI is injected by the preload script via contextBridge.
+    // If it's undefined the preload hasn't loaded yet — skip and avoid crash.
+    if (!window.luminaAPI) {
+      console.error('[useOllamaStream] window.luminaAPI is undefined — preload not loaded')
+      return
+    }
+
     // 1. Listen for chunks
     const cleanupChunk = window.luminaAPI.on('ollama:stream-chunk', (chunk: string) => {
       accumulatedResponseRef.current += chunk
