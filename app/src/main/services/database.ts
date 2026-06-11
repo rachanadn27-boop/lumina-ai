@@ -208,8 +208,9 @@ class DatabaseService {
 
       // Try importing and loading sqlite3
       try {
-        const sqlite3 = require('sqlite3')
-        const { open } = require('sqlite')
+        const sqlite3Module = await import('sqlite3')
+        const sqlite3 = sqlite3Module.default || sqlite3Module
+        const { open } = await import('sqlite')
 
         const sqliteDb = await open({
           filename: this.dbPath,
