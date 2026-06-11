@@ -26,5 +26,6 @@
       "@/*": ["src/*"]
     }
   },
-  "include": ["src"]
+  "include": ["src", "tests"],
+  "exclude": ["node_modules", "dist", "dist-electron", "tests/e2e"]
 }

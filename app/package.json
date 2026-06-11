@@ -3,13 +3,15 @@
   "version": "1.0.0",
   "description": "Privacy-first local AI writing assistant",
   "main": "dist-electron/main/index.js",
+  "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build && electron-builder",
     "build:electron": "vite build",
     "preview": "vite preview",
-    "test:unit": "vitest run",
-    "test:e2e": "playwright test"
+    "test:unit": "vitest run --config vitest.config.ts",
+    "test:e2e": "playwright test",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "lucide-react": "^0.379.0",
