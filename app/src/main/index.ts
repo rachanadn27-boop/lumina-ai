@@ -100,7 +100,7 @@ app.on('ready', async () => {
     
     // Retrieve registered shortcut from DB, fallback to default
     const shortcutSetting = await dbService.get<{ value: string }>('SELECT value FROM settings WHERE key = ?', ['shortcut'])
-    const shortcutStr = shortcutSetting?.value || 'Ctrl+Shift+E'
+    const shortcutStr = shortcutSetting?.value || 'Ctrl+Shift+R'
     shortcutService.init(mainWindow, shortcutStr)
 
     // Check if onboarding is completed

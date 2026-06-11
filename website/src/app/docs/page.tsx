@@ -196,7 +196,7 @@ export default function DocsPage() {
               {[
                 ['Step 1', 'Ollama Connection Check', 'Lumina pings localhost:11434 to confirm Ollama is running.'],
                 ['Step 2', 'Model Selection', 'Pick your model (qwen3:8b recommended). Lumina can pull it for you.'],
-                ['Step 3', 'Hotkey Setup', 'Set your global activation hotkey (default: Ctrl+Shift+E).'],
+                ['Step 3', 'Hotkey Setup', 'Set your global activation hotkey (default: Ctrl+Shift+R).'],
                 ['Step 4', 'Theme & Preferences', 'Choose dark or light mode, auto-start with Windows/macOS, etc.'],
                 ['Step 5', 'Done!', 'Lumina hides to the system tray. Press your hotkey anywhere to activate.'],
               ].map(([step, title, desc]) => (
@@ -221,7 +221,7 @@ export default function DocsPage() {
               <p className="text-xs font-bold text-white uppercase tracking-wider text-brand-primary">How it works</p>
               {[
                 ['1', 'Select text', 'Highlight any text in any app on your computer'],
-                ['2', 'Press hotkey', <>Hit <Kbd>Ctrl+Shift+E</Kbd> (or your custom hotkey)</>],
+                ['2', 'Press hotkey', <>Hit <Kbd>Ctrl+Shift+R</Kbd> (or your custom hotkey)</>],
                 ['3', 'Lumina opens', 'The floating overlay appears with your text pre-loaded'],
                 ['4', 'Choose action', 'Select a preset (Professional Tone, Summarize, Translate, etc.) or type a custom prompt'],
                 ['5', 'Review diff', 'See exactly what changed with a colour-coded visual diff'],
@@ -387,7 +387,7 @@ export default function DocsPage() {
                 </thead>
                 <tbody className="divide-y divide-white/5">
                   {[
-                    ['Ctrl+Shift+E', 'Open Lumina overlay (global, customisable)'],
+                    ['Ctrl+Shift+R', 'Open Lumina overlay (global, customisable)'],
                     ['Ctrl+Shift+P', 'Apply Professional Tone preset'],
                     ['Ctrl+Shift+I', 'Improve Writing preset'],
                     ['Ctrl+Shift+S', 'Summarize preset'],

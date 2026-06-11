@@ -103,7 +103,7 @@ const steps = [
     step: '4',
     title: 'Start writing privately!',
     body: 'Highlight any text in any app on your computer, press the hotkey, and Lumina rewrites it locally.',
-    code: 'Ctrl + Shift + E',
+    code: 'Ctrl + Shift + R',
   },
 ]
 
